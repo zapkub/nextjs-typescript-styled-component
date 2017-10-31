@@ -1,0 +1,23 @@
+
+{
+  "watch": [
+    ".env",
+    "config.js",
+    "components/",
+    "index.js",
+    "graphql/",
+    "server/",
+    "pages/"
+  ],
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    ".db",
+    ".bin",
+    "dist"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js json"
+}
