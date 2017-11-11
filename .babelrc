@@ -1,8 +1,13 @@
 {
   "presets": [
-    "react-hot-loader/babel"
+    "es2015",
+    "react"
   ],
   "plugins": [
+    "./utils/babel.js",
+    // "dynamic-import-node",
+    "dynamic-import-webpack",
+    "react-hot-loader/babel",
     ["styled-components", { "ssr": true, "displayName": true, "preprocess": false } ]
   ]
 }
