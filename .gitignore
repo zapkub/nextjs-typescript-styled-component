@@ -2,6 +2,8 @@
 node_modules
 dist
 *.js
+*.jsx
 *.map
 package.lock.json
 .yarnclean
+!bin/development.js

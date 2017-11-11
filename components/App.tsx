@@ -29,9 +29,9 @@ export default class App extends React.Component<{match?: any}, {}>{
     const { match } = this.props
     return (
       <div>
-        {'Hello Boilterplate'}
+        {'Hello Boilterplate !!!'}
         <Button title="name" />
-        {routes}
+        {/* {routes} */}
       </div>
     )
   }

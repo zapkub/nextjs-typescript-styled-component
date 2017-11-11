@@ -38,29 +38,39 @@ const app = express()
 if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack')
   const webpackMiddleware = require('webpack-dev-middleware')
+  const compiler = webpack(require('./webpack.config'))
   app.use(
-    webpackMiddleware(
-      webpack(require('./webpack.config')),
+    webpackMiddleware(compiler ,
       {
         publicPath: '/public/',
+        hot: true,
         stats: {
           chunks: false,
           color: true,
           lazy: true
         }
       }
-    ))
+  ))
+  app.use(require("webpack-hot-middleware")(compiler));
 }
 
 const port = process.env.PORT || 3000
 
 const __html = fs.readFileSync(path.join(__dirname, 'index.html')).toString()
-
-app.get('*', (req, res) => {
+function clearRequireCache() {
+  const keys = Object.keys(require.cache)
+    .filter(key => /.+\/components/.test(key))
+    .forEach(key => {
+      delete require.cache[key]
+    })
+}
+app.get('*', async (req, res) => {
 
   const modules = []
   const App = require('./components/App').default
 
+  clearRequireCache()
+  await Loadable.preloadAll()
   const RenderedApp = renderToString(
     <Loadable.Capture report={moduleName => modules.push(moduleName)}>
       <Router location={req.url} context={{}}>
@@ -68,9 +78,7 @@ app.get('*', (req, res) => {
       </Router>
     </Loadable.Capture>)
   let bundles = getBundles(stats, modules)
-  console.log(modules)
   const PreloadModule = bundles.map(bundle => {
-    console.log(bundle)
     if (/.+\.map/.test(bundle.file)) {
       return ''
     }

@@ -5,7 +5,7 @@
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "./utils/babel.js",
+    "./bin/babel.js",
     // "dynamic-import-node",
     "dynamic-import-webpack",
     ["styled-components", { "ssr": true, "displayName": true, "preprocess": false } ]
