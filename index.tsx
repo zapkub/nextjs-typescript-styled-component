@@ -4,15 +4,14 @@ import * as fs from 'fs'
 import * as React from 'react'
 import { StaticRouter as Router } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
-import App from './components/App'
 import { getBundles } from 'react-loadable/webpack'
-
+import { transformFileSync } from 'babel-core';
 /**
  * Use require for no default export lib
  */
 const express = require('express')
 const Loadable = require('react-loadable')
-const stats = require('./dist/react-loadable.json')
+const stats = require('./public/react-loadable.json')
 
 
 interface Loadable {
@@ -60,6 +59,7 @@ const __html = fs.readFileSync(path.join(__dirname, 'index.html')).toString()
 app.get('*', (req, res) => {
 
   const modules = []
+  const App = require('./components/App').default
 
   const RenderedApp = renderToString(
     <Loadable.Capture report={moduleName => modules.push(moduleName)}>

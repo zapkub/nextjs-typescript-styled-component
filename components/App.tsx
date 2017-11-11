@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-import routes from './routes'
+import { routes } from './routes'
 
 declare global {
   interface Function {

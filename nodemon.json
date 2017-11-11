@@ -3,11 +3,8 @@
   "watch": [
     ".env",
     "config.js",
-    "components/",
     "index.js",
-    "graphql/",
-    "server/",
-    "pages/"
+    "graphql/"
   ],
   "ignore": [
     ".git",

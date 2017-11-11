@@ -5,6 +5,7 @@ import { ReactLoadablePlugin } from 'react-loadable/webpack';
 module.exports = {
   entry: [
     'babel-polyfill',
+    'react-hot-loader/patch',
     './components/index.js'
   ],
   devtool: 'source-map',
@@ -26,12 +27,13 @@ module.exports = {
   },
   plugins: [
     new ReactLoadablePlugin({
-      filename: './dist/react-loadable.json'
+      filename: './public/react-loadable.json'
     })
   ],
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].chunk.js',
+    publicPath: '/public/',
     path: path.resolve(__dirname, 'dist')
   }
 }
